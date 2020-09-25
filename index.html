@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paystack API Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+article {
+    transition: all ease 200ms;
+}
+article:hover {
+    transform: translateY(-20px);
+}
+</style>
+<body>
+
+    <h2 class="font-weight-bold mb-5 mt-2 ml-5">
+       <img src="img/chicken-bucket.png" height="20" alt=""> MENU</h2>
+ 
+    <div class="container mt-3 mb-5">
+        <h4 class="font-weight-bold text-warning text-center mb-5"><i>Special Offers</i></h4>
+        <div class="row text-center">
+
+            <div class="col-lg-3 mt-2 col-md-6 col-sm-12">
+                <article class="bg-light p-5 shadow rounded">
+                    <h5 class="font-weight-bold">Shawarma</h5>
+                    <img src="img/one.jpg" class="img-fluid" alt="">
+        <button type="button" class="btn btn-success mt-3" onclick="payWithPaystack()"> Pay Now </button> 
+                </article>
+            </div>
+
+            <div class="col-lg-3 mt-2 col-md-6 col-sm-12">
+                <article class="bg-light p-5 shadow rounded">
+                    <h5 class="font-weight-bold">Chips & Chops</h5>
+                    <img src="img/two.jpg" class="img-fluid" alt="">
+        <button type="button" class="btn btn-success mt-3" onclick="payWithPaystack()"> Pay Now </button> 
+                </article>
+            </div>
+
+            <div class="col-lg-3 mt-2 col-md-6 col-sm-12">
+                <article class="bg-light p-5 shadow rounded">
+                    <h5 class="font-weight-bold">Burger</h5>
+                    <img src="img/three.jpg" class="img-fluid" alt="">
+        <button type="button" class="btn btn-success mt-3" onclick="payWithPaystack()"> Pay Now </button> 
+                </article>
+            </div>
+
+            <div class="col-lg-3 mt-2 col-md-6 col-sm-12">
+                <article class="bg-light p-5 shadow rounded">
+                    <h5 class="font-weight-bold">Vegan</h5>
+                    <img src="img/four.jpg" class="img-fluid" alt="">
+        <button type="button" class="btn btn-success mt-3" onclick="payWithPaystack()"> Pay Now </button> 
+                </article>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container mb-5"><hr></div>
+
+<footer class="footer text-center bg-warning p-2">
+<small>Cyprian Nwaerema &copy copyright 2020</small>
+</footer>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+        function payWithPaystack(){
+          var handler = PaystackPop.setup({
+            key: 'pk_live_7b7a7f5653eba289257875634b0268fd30e39827',
+            email: 'customer@email.com',
+            amount: 10000,
+            ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            metadata: {
+               custom_fields: [
+                  {
+                      display_name: "Mobile Number",
+                      variable_name: "mobile_number",
+                      value: "+2348012345678"
+                  }
+               ]
+            },
+            callback: function(response){
+                alert('success. transaction ref is ' + response.reference);
+            },
+            onClose: function(){
+                alert('window closed');
+            }
+          });
+          handler.openIframe();
+        }
+    </script>
+</body>
+</html>
